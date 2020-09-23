@@ -3,20 +3,16 @@
 ---
 mongodb:
   wanted:
-    # choose what you want
     database:
       - mongod
-      - mongos
-      - dbtools
       - shell
-    gui:
-      - robo3t
-           {%- if grains.kernel|lower == 'darwin' %}
-      - compass
-           {%- endif %}
-    connectors:
-      # bi   # enterprise advanced subscription
-      - kafka
-    upstream_repo: false
-  linux:
-    altpriority: 10000
+  pkg:
+    deps:
+      - python3-pip
+    database:
+      mongod:
+        version: 4.4.1
+        use_upstream: 'archive'
+        config:
+          storage:
+            dbPath: /var/lib/mongodb/mongod
